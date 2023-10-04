@@ -25,8 +25,8 @@ export default function ProfileFunction ({session}:{session:SessionUser & Profil
         className={`z-10 ${isOpen? "":"hidden"} bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600 absolute top-20 right-36 w-80`}
       >
         <div className="px-4 py-3 text-sm text-gray-900 dark:text-white">
-          <div>{session.profile.data[0].name}</div>
-          <div className="font-medium truncate">{session.user.data.session?.user.email}</div>
+          <div>{session.profile.data ? session.profile.data[0].name  : "Login"}</div>
+          <div className="font-medium truncate">{session.user.data.session?.user.email ?? "Login"}</div>
         </div>
         <ul
           className="py-2 text-sm text-gray-700 dark:text-gray-200"
