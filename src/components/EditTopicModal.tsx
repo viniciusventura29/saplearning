@@ -13,21 +13,21 @@ export default function NewTopicModal({
   setEditTopicModalIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
   topicTitleProps:string;
   topicDescProps:string;
-  topicId:number
+  topicId:string
 }) {
   const [topicTitle, setTopicTitle] = useState(topicTitleProps);
   const [topicDesc, setTopicDesc] = useState(topicDescProps);
   const queryClient = useQueryClient();
+  console.log(topicId)
   
-  const topicEdit = useMutation(({topicId}:{topicId:number})=>editTopic({topicId, topicDesc,topicTitle}),{onSuccess:()=>{
+  const topicEdit = useMutation(({topicId}:{topicId:string})=>editTopic({topicId, topicDesc,topicTitle}),{onSuccess:()=>{
     queryClient.invalidateQueries(['getTopics']);
     setEditTopicModalIsOpen(false)
-    setTopicDesc("");
-    setTopicTitle("");
   }})
 
   return (
     <div
+    onClick={(e)=>e.preventDefault()}
       id="defaultModal"
       tabIndex={-1}
       aria-hidden="true"
@@ -40,16 +40,15 @@ export default function NewTopicModal({
         <div className="relative bg-white rounded-lg shadow dark:bg-gray-700">
           <div className="flex items-start justify-between p-4 border-b rounded-t dark:border-gray-600">
             <h3 className="text-xl font-semibold text-gray-900 dark:text-white">
-              Create new topic
+              Edit topic
             </h3>
             <button
               type="button"
               className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
               data-modal-hide="defaultModal"
-              onClick={() => {
+              onClick={(e) => {
                 setEditTopicModalIsOpen(false);
-                setTopicDesc("");
-                setTopicTitle("");
+                e.preventDefault();
               }}
             >
               <svg
@@ -70,8 +69,8 @@ export default function NewTopicModal({
               <span className="sr-only">Close modal</span>
             </button>
           </div>
-
-          <div className="p-6 space-y-6 flex flex-col">
+<form onSubmit={()=>topicEdit.mutate({topicId:topicId})}>
+<div className="p-6 space-y-6 flex flex-col">
             <div className="flex flex-col gap-2">
               <label htmlFor="topicTitle">Topic title</label>
               <input
@@ -99,17 +98,16 @@ export default function NewTopicModal({
           <div className="flex items-center p-6 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600">
             <button
               data-modal-hide="defaultModal"
-              type="button"
+              type="submit"
               className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-              onClick={()=>topicEdit.mutate({topicId:topicId})}
+              onClick={(e)=>{topicEdit.mutate({topicId:topicId}); e.preventDefault()}}
             >
-              Create
+              Edit
             </button>
             <button
-              onClick={() => {
+              onClick={(e) => {
                 setEditTopicModalIsOpen(false);
-                setTopicDesc("");
-                setTopicTitle("");
+                e.preventDefault()
               }}
               data-modal-hide="defaultModal"
               type="button"
@@ -118,6 +116,8 @@ export default function NewTopicModal({
               Cancel
             </button>
           </div>
+</form>
+         
         </div>
       </div>
     </div>

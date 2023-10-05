@@ -37,7 +37,7 @@ export default function App() {
                         </h4>
                       </div>
       
-                      <form>
+                      <form onSubmit={login}>
                         <p className="mb-4">Please login to your account</p>
 
                         <div className="relative mb-4" data-te-input-wrapper-init>
@@ -78,7 +78,7 @@ export default function App() {
                           <button
                           onClick={login}
                             className="mb-3 inline-block w-full rounded p-4 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_rgba(0,0,0,0.2)] transition duration-150 ease-in-out hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.1),0_4px_18px_0_rgba(0,0,0,0.2)] focus:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.1),0_4px_18px_0_rgba(0,0,0,0.2)] focus:outline-none focus:ring-0 active:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.1),0_4px_18px_0_rgba(0,0,0,0.2)]"
-                            type="button"
+                            type="submit"
                             data-te-ripple-init
                             data-te-ripple-color="light"
                             style={{background: "linear-gradient(to right, #ee7724, #d8363a, #dd3675, #b44593)"}}>
