@@ -10,7 +10,7 @@ export const Navbar = ({ session }: { session: SessionUser }) => {
       </div>
       <div className="shadow w-full h-20 px-32 py-4 flex items-center justify-between relative">
         <img className="h-16" src={boschLogo} alt="" />
-        {session ? <div><ProfileButton session={session} /></div> : <p>Login</p>}
+        {session?.user.data.session ? <div><ProfileButton session={session} /></div> : <a href="/login" style={{background: "linear-gradient(to right, #ee7724, #d8363a, #dd3675, #b44593)"}} className="rounded p-3 w-36 font-medium uppercase text-xs cursor-pointer flex justify-center text-white shadow-[0_4px_9px_-4px_rgba(0,0,0,0.2)] transition duration-150 ease-in-out hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.1),0_4px_18px_0_rgba(0,0,0,0.2)] focus:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.1),0_4px_18px_0_rgba(0,0,0,0.2)] focus:outline-none focus:ring-0 active:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.1),0_4px_18px_0_rgba(0,0,0,0.2)]">Login</a>}
       </div>
     </nav>
   );
