@@ -9,6 +9,8 @@ import { PlusIcon } from "./icons/PlusIcon";
 import NewTopicModal from "./components/NewTopicModal";
 import { getTopics } from "./api";
 import { useQuery } from "react-query";
+import { Footer } from "./components/Footer";
+
 export default function App() {
   const [topics, setTopics] = useState<any[] | null>();
   const [newTopicModalIsOpen, setNewTopicModalIsOpen] = useState(false);
@@ -43,9 +45,10 @@ export default function App() {
           </div>
           <div className="w-full grid gap-4 grid-cols-4 px-52 pb-32">
             {topics?.map((t) => (
-              <Card key={t.title} description={t.description} title={t.title} id={t.id} />
+              <Card session={session} key={t.title} description={t.description} title={t.title} id={t.id} />
             ))}
           </div>
+          <Footer />
         </div>
       )}
     </AuthMiddleware>
