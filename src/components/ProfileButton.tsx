@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { ProfileUser, SessionUser, supabase } from "../../authmiddleware/authMiddleware";
+import { UserIcon } from "../icons/UserIcon";
 
 export default function ProfileFunction ({session}:{session:SessionUser & ProfileUser}){
     const [isOpen, setIsOpen] = useState(false);
@@ -10,15 +11,10 @@ export default function ProfileFunction ({session}:{session:SessionUser & Profil
 
   return (
     <div>
-      <img
-        id="avatarButton"
-        data-dropdown-toggle="userDropdown"
-        data-dropdown-placement="bottom-start"
-        className="w-10 h-10 rounded-full cursor-pointer"
-        src="/docs/images/people/profile-picture-5.jpg"
-        alt="User dropdown"
-        onClick={()=>setIsOpen(!isOpen)}
-      />
+        
+   <div className="cursor-pointer p-2 bg-gray-200 rounded-full" onClick={()=>setIsOpen(!isOpen)}>
+    <UserIcon />
+   </div>
 
       <div
         id="userDropdown"
