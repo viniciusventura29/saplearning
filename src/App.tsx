@@ -3,13 +3,14 @@ import AuthMiddleware, {
 } from "../authmiddleware/authMiddleware";
 import { Navbar } from "./components/Navbar";
 import Hero from "./components/Hero";
-import { useState } from "react";
+import { SetStateAction, useState } from "react";
 import Card from "./components/Card";
 import { PlusIcon } from "./icons/PlusIcon";
 import NewTopicModal from "./components/NewTopicModal";
 import { getTopics } from "./api";
 import { useQuery } from "react-query";
 import { Footer } from "./components/Footer";
+import { Searchbar } from "./components/SearchBar";
 
 export default function App() {
   const [topics, setTopics] = useState<any[] | null>();
@@ -30,11 +31,12 @@ export default function App() {
           
           <Navbar session={session} />
           <Hero />
-          <div className="w-full flex px-52 pt-32 pb-10">
+          <div className="w-full flex px-52 pt-32 pb-10 justify-between">
+            
             {session?.user.data.session ? (
               <button
                 onClick={() => setNewTopicModalIsOpen(true)}
-                className="bg-blue-500 hover:bg-blue-600 px-6 py-2 text-white rounded flex gap-2 justify-center items-center"
+                className="bg-blue-500 hover:bg-blue-600 px-6 text-white rounded flex gap-2 justify-center items-center"
               >
                 <PlusIcon />
                 New Topic
@@ -42,6 +44,7 @@ export default function App() {
             ) : (
               <div></div>
             )}
+            <Searchbar setTopics={setTopics} />
           </div>
           <div className="w-full grid gap-4 grid-cols-4 px-52 pb-32">
             {topics?.map((t) => (
