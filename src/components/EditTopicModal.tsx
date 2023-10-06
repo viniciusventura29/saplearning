@@ -18,8 +18,7 @@ export default function NewTopicModal({
   const [topicTitle, setTopicTitle] = useState(topicTitleProps);
   const [topicDesc, setTopicDesc] = useState(topicDescProps);
   const queryClient = useQueryClient();
-  console.log(topicId)
-  
+
   const topicEdit = useMutation(({topicId}:{topicId:string})=>editTopic({topicId, topicDesc,topicTitle}),{onSuccess:()=>{
     queryClient.invalidateQueries(['getTopics']);
     setEditTopicModalIsOpen(false)
@@ -31,7 +30,7 @@ export default function NewTopicModal({
       id="defaultModal"
       tabIndex={-1}
       aria-hidden="true"
-      className={`fixed top-0 left-0 right-0 z-50 w-full flex justify-center items-center p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full ${
+      className={`fixed top-0 cursor-auto left-0 right-0 z-50 w-full flex justify-center items-center p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full ${
         editTopicModalIsOpen ? "" : "hidden"
       }`}
     >
