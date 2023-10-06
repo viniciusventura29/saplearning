@@ -46,6 +46,10 @@ export const editTopic = async ({
     .eq("title", topicId);
 };
 
+export const deleteTopic = async ({ topicTitle }: { topicTitle: string }) => {
+  return await supabase.from("topics").delete().eq("title", topicTitle);
+};
+
 export const getArticle = async ({
   topic_id,
   setText,
@@ -68,7 +72,30 @@ export const getArticle = async ({
     return;
   }
 
-  console.log(data)
+  return setText(data[0]);
+};
 
-  return setText(data[0])
+export const searchTopicById = async ({
+  setTopics,
+  topic_id,
+}: {
+  setTopics: React.Dispatch<React.SetStateAction<any[] | null | undefined>>;
+  topic_id: string;
+}) => {
+  const { data, error } = await supabase
+    .from("topics")
+    .select("*")
+    .textSearch("title", topic_id);
+
+  if (error) {
+    console.log(error);
+    return;
+  }
+
+  if (!data) {
+    console.log("Data is null!");
+    return;
+  }
+
+  return setTopics(data);
 };
