@@ -5,7 +5,8 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Login from "./pages/Login.tsx";
 import Page404 from "./pages/Page404.tsx";
 import { QueryClient, QueryClientProvider} from "react-query";
-import TopicPage from "./pages/[id].tsx";
+import ArticlePage from "./pages/[id]/index.tsx";
+import EditArtcilePage, { EditPage } from "./pages/[id]/edit.tsx";
 
 const queryClient = new QueryClient();
 
@@ -20,7 +21,11 @@ const router = createBrowserRouter([
   },
   {
     path: "/:id",
-    element: <TopicPage />,
+    element: <ArticlePage />,
+  },
+  {
+    path: "/:id/edit",
+    element: <EditPage />,
   },
 ]);
 
