@@ -27,9 +27,14 @@ export const createTopic = async ({
   topicTitle: string;
   topicDesc: string;
 }) => {
-  return await supabase
+  await supabase
     .from("topics")
-    .insert({ title: topicTitle, description: topicDesc });
+    .insert({ title: topicTitle, description: topicDesc })
+    .then(async (e) => {
+      await supabase
+        .from("Article")
+        .insert({ body: "", title: "", topic_id: topicTitle});
+    });
 };
 export const editTopic = async ({
   topicId,
@@ -50,13 +55,7 @@ export const deleteTopic = async ({ topicTitle }: { topicTitle: string }) => {
   return await supabase.from("topics").delete().eq("title", topicTitle);
 };
 
-export const getArticle = async ({
-  topic_id,
-  setText,
-}: {
-  topic_id: string;
-  setText: React.Dispatch<React.SetStateAction<string>>;
-}) => {
+export const getArticle = async ({ topic_id }: { topic_id: string }) => {
   const { data, error } = await supabase
     .from("Article")
     .select("*")
@@ -72,7 +71,7 @@ export const getArticle = async ({
     return;
   }
 
-  return setText(data[0]);
+  return data[0];
 };
 
 export const searchTopicById = async ({
