@@ -1,9 +1,7 @@
-import AuthMiddleware, {
-  SessionUser,
-} from "../authmiddleware/authMiddleware";
+import AuthMiddleware, { SessionUser } from "../authmiddleware/authMiddleware";
 import { Navbar } from "./components/Navbar";
 import Hero from "./components/Hero";
-import { SetStateAction, useState } from "react";
+import { useState } from "react";
 import Card from "./components/Card";
 import { PlusIcon } from "./icons/PlusIcon";
 import NewTopicModal from "./components/NewTopicModal";
@@ -11,14 +9,27 @@ import { getTopics } from "./api";
 import { useQuery } from "react-query";
 import { Footer } from "./components/Footer";
 import { Searchbar } from "./components/SearchBar";
+import { Spinner } from "./components/Spinner";
 
 export default function App() {
   const [topics, setTopics] = useState<any[] | null>();
   const [newTopicModalIsOpen, setNewTopicModalIsOpen] = useState(false);
-  useQuery({
+  const { isLoading, isError } = useQuery({
     queryKey: ["getTopics"],
     queryFn: () => getTopics({ setTopics }),
   });
+
+  if (isLoading)
+    return (
+      <div
+        role="status"
+        className="w-screen h-screen flex flex-col gap-3 items-center justify-center"
+      >
+        <Spinner />
+        <span className="text-xl font-bold text-blue-700">Carregando...</span>
+      </div>
+    );
+  if (isError) return <div>Error!</div>;
 
   return (
     <AuthMiddleware>
@@ -28,11 +39,10 @@ export default function App() {
             newTopicModalIsOpen={newTopicModalIsOpen}
             setNewTopicModalIsOpen={setNewTopicModalIsOpen}
           />
-          
+
           <Navbar session={session} />
           <Hero />
           <div className="w-full flex px-52 pt-32 pb-10 justify-between">
-            
             {session?.user.data.session ? (
               <button
                 onClick={() => setNewTopicModalIsOpen(true)}
@@ -47,9 +57,19 @@ export default function App() {
             <Searchbar setTopics={setTopics} />
           </div>
           <div className="w-full grid gap-4 grid-cols-4 px-52 pb-32">
-            {topics?.map((t) => (
-              <Card session={session} key={t.title} description={t.description} title={t.title} id={t.id} />
-            ))}
+            {isLoading ? (
+              <Spinner />
+            ) : (
+              topics?.map((t) => (
+                <Card
+                  session={session}
+                  key={t.title}
+                  description={t.description}
+                  title={t.title}
+                  id={t.id}
+                />
+              ))
+            )}
           </div>
           <Footer />
         </div>
