@@ -18,14 +18,14 @@ export default function ProfileFunction({
   };
 
   return (
-    <div onBlur={()=>setIsOpen(false)}>
+    <div onBlur={() => setIsOpen(false)}>
+      d53b103c87ab97804ecebd86f3fa5e2644da2878
       <div
         className="cursor-pointer p-2 bg-gray-200 rounded-full"
         onClick={() => setIsOpen(!isOpen)}
       >
         <UserIcon />
       </div>
-
       <div
         id="userDropdown"
         className={`z-10 ${
@@ -33,26 +33,26 @@ export default function ProfileFunction({
         } bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600 absolute top-20 right-36 w-80`}
       >
         <div className="px-4 py-3 text-sm text-gray-900 dark:text-white">
-          <div>
-            {session.profile.data ? session.profile.data[0].name : "Login"}
-          </div>
-          <div className="font-medium truncate">
-            {session.user.data.session?.user.email ?? "Login"}
-          </div>
+          {session.profile.data ? session.profile.data[0].name : "Login"}
         </div>
-        <div>
-          {session.profile.data[0].role == "ADMIN" ? (
-            <ul className="w-full text-left border-b block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">
-              <a href="/admin" className="cursor-pointer w-full">Admin</a>
-            </ul>
-          ) : null}
-          <button
-            onClick={singout}
-            className="w-full text-left block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
-          >
-            Sign out
-          </button>
+        <div className="font-medium truncate">
+          {session.user.data.session?.user.email ?? "Login"}
         </div>
+      </div>
+      <div>
+        {session.profile.data[0].role == "ADMIN" ? (
+          <ul className="w-full text-left border-b block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">
+            <a href="/admin" className="cursor-pointer w-full">
+              Admin
+            </a>
+          </ul>
+        ) : null}
+        <button
+          onClick={singout}
+          className="w-full text-left block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+        >
+          Sign out
+        </button>
       </div>
     </div>
   );
