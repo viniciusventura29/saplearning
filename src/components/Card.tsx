@@ -17,15 +17,16 @@ export default function Card({
   session: SessionUser & ProfileUser;
 }) {
   const [editTopicModalIsOpen, setEditTopicModalIsOpen] = useState(false);
-  const [confirmDeleteTopicModalIsOpen, setConfirmDeleteTopicModalIsOpen] = useState(false);
+  const [confirmDeleteTopicModalIsOpen, setConfirmDeleteTopicModalIsOpen] =
+    useState(false);
   return (
     <a
       href={`/${title}`}
       id="anchor"
-      className="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
+      className="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 "
     >
       <div className="flex justify-between items-center">
-        <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+        <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900">
           {title}
         </h5>
         <div className="flex gap-2">
@@ -41,7 +42,8 @@ export default function Card({
               <EditIcon />
             </button>
           ) : null}
-          {session?.user.data.session && session?.profile.data[0].role === "ADMIN" ? (
+          {session?.user.data.session &&
+          session?.profile.data[0].role === "ADMIN" ? (
             <button
               onClick={(e) => {
                 setConfirmDeleteTopicModalIsOpen(true);
@@ -55,9 +57,7 @@ export default function Card({
           ) : null}
         </div>
       </div>
-      <p className="font-normal text-gray-700 dark:text-gray-400">
-        {description}
-      </p>
+      <p className="font-normal text-gray-700">{description}</p>
       <EditTopicModal
         editTopicModalIsOpen={editTopicModalIsOpen}
         topicDescProps={description}
@@ -65,7 +65,11 @@ export default function Card({
         topicId={title}
         topicTitleProps={title}
       />
-      <ConfirmDeleteTopicModal confirmDeleteTopicModalIsOpen={confirmDeleteTopicModalIsOpen} setConfirmDeleteTopicModalIsOpen={setConfirmDeleteTopicModalIsOpen} title={title} />
+      <ConfirmDeleteTopicModal
+        confirmDeleteTopicModalIsOpen={confirmDeleteTopicModalIsOpen}
+        setConfirmDeleteTopicModalIsOpen={setConfirmDeleteTopicModalIsOpen}
+        title={title}
+      />
     </a>
   );
 }
