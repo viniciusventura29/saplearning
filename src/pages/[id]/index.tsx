@@ -13,7 +13,7 @@ function Article({ data, session }: { data: any; session: any }) {
   return (
     <div>
       <Navbar session={session} />
-      <div className="flex mb-32">
+      <div className="flex mb-32 pt-20">
         <div className="w-full h-[100vh - 90px] flex flex-col">
           <div className="w-full h-14 flex items-center justify-end"></div>
           <div className="flex justify-center items-center ">

@@ -4,7 +4,7 @@ import { SessionUser } from "../../authmiddleware/authMiddleware";
 import ProfileButton from "./ProfileButton";
 export const Navbar = ({ session }: { session?: SessionUser }) => {
   return (
-    <nav className="mb-8 bg-white">
+    <nav className="mb-8 z-50 flex w-full flex-col fixed bg-white">
       <div className="h-2 w-full overflow-hidden">
         <img src={boschSupergraphic} className="w-full" alt="" />
       </div>

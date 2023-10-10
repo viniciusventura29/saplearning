@@ -63,7 +63,7 @@ export default function EditArtcilePage({
       onSubmit={(e) => {
         e.preventDefault();
       }}
-      className="w-full h-full mb-32"
+      className="w-full h-full mb-32 pt-32"
     >
       <div className="w-full h-full flex justify-center">
         <div className="w-[75%] h-full flex flex-col items-start ">
