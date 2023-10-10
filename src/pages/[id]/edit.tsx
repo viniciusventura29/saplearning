@@ -34,6 +34,7 @@ export default function EditArtcilePage({
 
   const editor = useEditor({
     extensions: [
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       //@ts-ignore Typescript is crazy or smth
       StarterKit,
       BulletList.configure({
@@ -87,7 +88,7 @@ export default function EditArtcilePage({
         className="w-full h-full mb-32 pt-32"
       >
         <div className="w-full h-full flex justify-center">
-          <div className="w-[75%] h-full flex flex-col items-start ">
+          <div className="w-[75%] h-full flex flex-col items-start">
             <h2 className="text-2xl font-bold ">Editar Artigo</h2>
             <p className="mb-10">
               Aqui você pode editar essa artigo livremente!
