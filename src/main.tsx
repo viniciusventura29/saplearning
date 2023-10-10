@@ -7,6 +7,9 @@ import Page404 from "./pages/Page404.tsx";
 import { QueryClient, QueryClientProvider} from "react-query";
 import ArticlePage from "./pages/[id]/index.tsx";
 import EditArtcilePage, { EditPage } from "./pages/[id]/edit.tsx";
+import { AdminPage } from "./pages/admin/index.tsx";
+import { AllUsersPage } from "./pages/admin/AllUsers.tsx";
+import { NewUserPage } from "./pages/admin/NewUser.tsx";
 
 const queryClient = new QueryClient();
 
@@ -26,6 +29,18 @@ const router = createBrowserRouter([
   {
     path: "/:id/edit",
     element: <EditPage />,
+  },
+  {
+    path: "/admin",
+    element: <AdminPage />,
+  },
+  {
+    path: "/admin/newUsers",
+    element: <NewUserPage />,
+  },
+  {
+    path: "/admin/allUsers",
+    element: <AllUsersPage />,
   },
 ]);
 
