@@ -10,8 +10,8 @@ import { MantineProvider } from "@mantine/core";
 import BulletList from "@tiptap/extension-bullet-list";
 import OrderedList from "@tiptap/extension-ordered-list";
 import { useState } from "react";
-import { getArticle } from "../../api";
-import { useQuery } from "react-query";
+import { editArticle, getArticle } from "../../api";
+import { useMutation, useQuery, useQueryClient } from "react-query";
 import { useParams } from "react-router-dom";
 import { Spinner } from "../../components/Spinner";
 import { Navbar } from "../../components/Navbar";
@@ -20,13 +20,17 @@ import { Footer } from "../../components/Footer";
 
 export default function EditArtcilePage({
   data,
-  session
+  session,
 }: {
   data: any;
-  session:any
+  session: any;
 }) {
-    const [content, setContent] = useState(data.body==""?"Write the article body here":data.body);
-    const [title, setTitle] = useState(data.title==""?"Write the article title here":data.title)
+  const [content, setContent] = useState(
+    data.body == "" ? "Write the article body here" : data.body
+  );
+  const [title, setTitle] = useState(
+    data.title == "" ? "Write the article title here" : data.title
+  );
 
   const editor = useEditor({
     extensions: [
@@ -50,89 +54,121 @@ export default function EditArtcilePage({
       TextAlign.configure({ types: ["heading", "paragraph"] }),
     ],
     content: content,
-    
+
     onUpdate: (d) => {
       setContent(d.editor.getHTML());
     },
   });
 
+  // console.log(data);
+  const queryClient = useQueryClient();
+
+  const edArticle = useMutation(
+    () =>
+      editArticle({
+        articleBody: content,
+        articleTitle: title,
+        articleTopicId: data.topic_id,
+      }),
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries(["getArticle"]);
+      },
+    }
+  );
+
   return (
     <div>
-        <Navbar session={session}/>
-        <form
-      onSubmit={(e) => {
-        e.preventDefault();
-      }}
-      className="w-full h-full mb-32 pt-32"
-    >
-      <div className="w-full h-full flex justify-center">
-        <div className="w-[75%] h-full flex flex-col items-start ">
-          <h2 className="text-2xl font-bold ">Editar Artigo</h2>
-          <p className="mb-10">Aqui você pode editar essa artigo livremente!</p>
-          <div className="flex flex-col w-full mt-8 markdown">
-            <MantineProvider>
-              <RichTextEditor editor={editor} >
-                <RichTextEditor.Toolbar
-                  sticky
-                  display="flex"
-                  className="justify-between rounded bg-gray-50 shadow border p-3 mb-4"
-                  stickyOffset={60}
-                >
-                  <RichTextEditor.ControlsGroup className="flex gap-3">
-                    <RichTextEditor.Bold />
-                    <RichTextEditor.Italic />
-                    <RichTextEditor.Underline />
-                    <RichTextEditor.Strikethrough />
-                    <RichTextEditor.ClearFormatting />
-                    <RichTextEditor.Highlight />
-                    <RichTextEditor.Code />
-                  </RichTextEditor.ControlsGroup>
+      <Navbar session={session} />
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+        }}
+        className="w-full h-full mb-32 pt-32"
+      >
+        <div className="w-full h-full flex justify-center">
+          <div className="w-[75%] h-full flex flex-col items-start ">
+            <h2 className="text-2xl font-bold ">Editar Artigo</h2>
+            <p className="mb-10">
+              Aqui você pode editar essa artigo livremente!
+            </p>
+            <div className="flex flex-col w-full mt-8 markdown">
+              <MantineProvider>
+                <RichTextEditor editor={editor}>
+                  <RichTextEditor.Toolbar
+                    sticky
+                    display="flex"
+                    className="justify-between rounded bg-gray-50 shadow border p-3 mb-4"
+                    stickyOffset={60}
+                  >
+                    <RichTextEditor.ControlsGroup className="flex gap-3">
+                      <RichTextEditor.Bold />
+                      <RichTextEditor.Italic />
+                      <RichTextEditor.Underline />
+                      <RichTextEditor.Strikethrough />
+                      <RichTextEditor.ClearFormatting />
+                      <RichTextEditor.Highlight />
+                      <RichTextEditor.Code />
+                    </RichTextEditor.ControlsGroup>
 
-                  <RichTextEditor.ControlsGroup className="flex gap-2">
-                    <RichTextEditor.H1 />
-                    <RichTextEditor.H2 />
-                    <RichTextEditor.H3 />
-                    <RichTextEditor.H4 />
-                  </RichTextEditor.ControlsGroup>
+                    <RichTextEditor.ControlsGroup className="flex gap-2">
+                      <RichTextEditor.H1 />
+                      <RichTextEditor.H2 />
+                      <RichTextEditor.H3 />
+                      <RichTextEditor.H4 />
+                    </RichTextEditor.ControlsGroup>
 
-                  <RichTextEditor.ControlsGroup className="flex gap-2">
-                    <RichTextEditor.Blockquote />
-                    <RichTextEditor.Hr />
-                    <RichTextEditor.BulletList />
-                    <RichTextEditor.OrderedList />
-                    <RichTextEditor.Subscript />
-                    <RichTextEditor.Superscript />
-                  </RichTextEditor.ControlsGroup>
+                    <RichTextEditor.ControlsGroup className="flex gap-2">
+                      <RichTextEditor.Blockquote />
+                      <RichTextEditor.Hr />
+                      <RichTextEditor.BulletList />
+                      <RichTextEditor.OrderedList />
+                      <RichTextEditor.Subscript />
+                      <RichTextEditor.Superscript />
+                    </RichTextEditor.ControlsGroup>
 
-                  <RichTextEditor.ControlsGroup className="flex gap-2">
-                    <RichTextEditor.Link />
-                    <RichTextEditor.Unlink />
-                  </RichTextEditor.ControlsGroup>
+                    <RichTextEditor.ControlsGroup className="flex gap-2">
+                      <RichTextEditor.Link />
+                      <RichTextEditor.Unlink />
+                    </RichTextEditor.ControlsGroup>
 
-                  <RichTextEditor.ControlsGroup className="flex gap-2">
-                    <RichTextEditor.AlignLeft />
-                    <RichTextEditor.AlignCenter />
-                    <RichTextEditor.AlignJustify />
-                    <RichTextEditor.AlignRight />
-                  </RichTextEditor.ControlsGroup>
-                </RichTextEditor.Toolbar>
-                <input value={title} onChange={(e)=>setTitle(e.target.value)} type="text" className="bg-gray-50 rounded-t-lg border border-b-none p-4 shadow w-full" />
-                <RichTextEditor.Content className="min-h-screen bg-gray-50 rounded-b-lg border border-t-none shadow p-4" />
-              </RichTextEditor>
-            </MantineProvider>
+                    <RichTextEditor.ControlsGroup className="flex gap-2">
+                      <RichTextEditor.AlignLeft />
+                      <RichTextEditor.AlignCenter />
+                      <RichTextEditor.AlignJustify />
+                      <RichTextEditor.AlignRight />
+                    </RichTextEditor.ControlsGroup>
+                  </RichTextEditor.Toolbar>
+                  <input
+                    value={title}
+                    onChange={(e) => setTitle(e.target.value)}
+                    type="text"
+                    className="bg-gray-50 rounded-t-lg border border-b-none p-4 shadow w-full"
+                  />
+                  <RichTextEditor.Content className="min-h-screen bg-gray-50 rounded-b-lg border border-t-none shadow p-4" />
+                </RichTextEditor>
+              </MantineProvider>
+            </div>
+            <button
+              className="rounded-full p-3 px-6 text-lg text-white fixed right-14 bottom-14 bg-blue-500"
+              onClick={(e) => {
+                edArticle.mutate();
+                e.preventDefault();
+              }}
+            >
+              Finalizar
+            </button>
           </div>
-          <button className="rounded-full p-3 px-6 text-lg text-white fixed right-14 bottom-14 bg-blue-500">Finalizar</button>
         </div>
-      </div>
-    </form>
-    <Footer />
+      </form>
+      <Footer />
     </div>
   );
 }
 
 export function EditPage() {
   const { id } = useParams();
-  const { data, isLoading, isError } = useQuery({
+  const { data, isLoading } = useQuery({
     queryKey: ["getArticle"],
     queryFn: () => getArticle({ topic_id: id ?? "" }),
   });
@@ -149,10 +185,7 @@ export function EditPage() {
         </div>
       ) : (
         <AuthMiddleware>
-            {(session)=>(
-                <EditArtcilePage data={data} session={session} />
-            )}
-
+          {(session) => <EditArtcilePage data={data} session={session} />}
         </AuthMiddleware>
       )}
     </div>

@@ -33,7 +33,7 @@ export const createTopic = async ({
     .then(async (e) => {
       await supabase
         .from("Article")
-        .insert({ body: "", title: "", topic_id: topicTitle});
+        .insert({ body: "", title: "", topic_id: topicTitle });
     });
 };
 export const editTopic = async ({
@@ -72,6 +72,37 @@ export const getArticle = async ({ topic_id }: { topic_id: string }) => {
   }
 
   return data[0];
+};
+
+export const createArticle = async ({
+  articleBody,
+  articleTitle,
+  articleTopicId,
+}: {
+  articleBody: string;
+  articleTitle: string;
+  articleTopicId: string;
+}) => {
+  await supabase.from("Article").insert({
+    body: articleBody,
+    title: articleTitle,
+    topic_id: articleTopicId,
+  });
+};
+
+export const editArticle = async ({
+  articleBody,
+  articleTitle,
+  articleTopicId,
+}: {
+  articleBody: string;
+  articleTitle: string;
+  articleTopicId: string;
+}) => {
+  return await supabase
+    .from("Article")
+    .update({ body: articleBody, title: articleTitle })
+    .eq("topic_id", articleTopicId);
 };
 
 export const searchTopicById = async ({
