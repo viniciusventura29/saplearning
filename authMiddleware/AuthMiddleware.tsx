@@ -1,23 +1,11 @@
 import { ReactNode, useState } from "react";
-import { AuthError, Session } from "@supabase/supabase-js";
 import { useEffect } from "react";
 import { createClient } from "@supabase/supabase-js";
-
-export type SessionUser = {
-  user:
-    | {
-        data: { session: Session };
-        error: null;
-      }
-    | { data: { session: null }; error: AuthError }
-    | { data: { session: null }; error: null };
-};
-
-export type ProfileUser = any
+import { ProfileUser, SessionUser } from "../src/types";
 
 export const supabase = createClient(
   "https://sangyhnhodvxmkicjlnb.supabase.co",
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNhbmd5aG5ob2R2eG1raWNqbG5iIiwicm9sZSI6ImFub24iLCJpYXQiOjE2OTYzMzAwMDEsImV4cCI6MjAxMTkwNjAwMX0.aTmjA5pP_UvGT-WQdhrAUhQJ-I9PMSWEbDhG-5tdty0"
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNhbmd5aG5ob2R2eG1raWNqbG5iIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTY5NjMzMDAwMSwiZXhwIjoyMDExOTA2MDAxfQ.UGaKQaxhgVN02Q_bUy8ic_oa0knmGTRbVbxXY2cnT7Q"
 );
 
 const getUser = async () => {

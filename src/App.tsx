@@ -1,4 +1,4 @@
-import AuthMiddleware, { SessionUser } from "../authmiddleware/authMiddleware";
+import AuthMiddleware from "../authmiddleware/authMiddleware";
 import { Navbar } from "./components/Navbar";
 import Hero from "./components/Hero";
 import { useState } from "react";
@@ -10,6 +10,7 @@ import { useQuery } from "react-query";
 import { Footer } from "./components/Footer";
 import { Searchbar } from "./components/SearchBar";
 import { Spinner } from "./components/Spinner";
+import { SessionUser } from "./types";
 
 export default function App() {
   const [topics, setTopics] = useState<any[] | null>();
