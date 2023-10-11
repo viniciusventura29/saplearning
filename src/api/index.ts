@@ -1,4 +1,6 @@
+import { User } from "@supabase/supabase-js";
 import { supabase } from "../../authmiddleware/authMiddleware";
+import { AllUsersType, UserRoles } from "../types";
 
 export const getTopics = async ({
   setTopics,
@@ -128,4 +130,52 @@ export const searchTopicById = async ({
   }
 
   return setTopics(data);
+};
+
+export const getAllUsers = async () => {
+  const allUsers: AllUsersType = [
+    {
+      profile: { name: "", user_id: "", role: "", id: 0 },
+      users: {
+        id: "",
+        app_metadata: Object,
+        user_metadata: Object,
+        aud: "",
+        created_at: "",
+      },
+    },
+  ];
+  const profile = await supabase.from("profile").select("*");
+  const {
+    data: { users },
+    error,
+  } = await supabase.auth.admin.listUsers();
+  users.map((us) =>
+    profile.data?.map((prof) =>
+      us.id === prof.user_id
+        ? allUsers.push({ profile: prof, users: us })
+        : null
+    )
+  );
+  return allUsers;
+};
+
+export const deleteUser = async ({ userId }: { userId: string }) => {
+  await supabase.auth.admin.deleteUser(userId);
+};
+
+export const createUser = async ({
+  name,
+  email,
+  role,
+}: {
+  name: string;
+  email: string;
+  role: UserRoles;
+}) => {
+    await supabase.auth.admin.createUser({email,password:name+"GSTET3"}).then(async(e)=>{
+      await supabase.from('profile').insert({name:name, role:role, user_id:e.data.user?.id})
+    })
+
+    return console.log("User created")
 };
