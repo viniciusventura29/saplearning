@@ -1,10 +1,10 @@
 import { useState } from "react";
-import AuthMiddleware from "../../../authmiddleware/AuthMiddleware";
+import {AuthMiddleware} from "../../../authmiddleware/AuthMiddleware";
 import { Navbar } from "../../components/Navbar";
 import { Sidebar } from "../../components/Sidebar";
 import { ArrowIcon } from "../../icons/ArrowIcon";
 import { SessionUser, UserRoles } from "../../types";
-import { useMutation, useQueryClient } from "react-query";
+import { useMutation } from "react-query";
 import { createUser } from "../../api";
 import { useAlert } from "../../components/Alert";
 
@@ -14,7 +14,6 @@ function NewUser({ session }: { session: SessionUser }) {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const trigger = useAlert()
-  const queryClient = useQueryClient()
 
   const createUserMutation = useMutation(
     () => createUser({ name, email, role }),

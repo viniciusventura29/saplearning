@@ -5,7 +5,7 @@ import { Spinner } from "../../components/Spinner";
 import { Navbar } from "../../components/Navbar";
 import rehypeRaw from "rehype-raw";
 import ReactMarkdown from "react-markdown";
-import AuthMiddleware from "../../../authmiddleware/authMiddleware";
+import {AuthMiddleware} from "../../../authmiddleware/AuthMiddleware";
 import { EditIcon } from "../../icons/EditIcon";
 import { Footer } from "../../components/Footer";
 

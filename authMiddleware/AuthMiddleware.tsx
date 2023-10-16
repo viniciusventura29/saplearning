@@ -18,7 +18,7 @@ const getUser = async () => {
   return { user, profile };
 };
 
-const AuthMiddleware = ({
+export const AuthMiddleware = ({
   children,
 }: {
   children: (session: any) => ReactNode;
@@ -36,5 +36,3 @@ const AuthMiddleware = ({
 
   return <div>{children(session)}</div>;
 };
-
-export default AuthMiddleware;
