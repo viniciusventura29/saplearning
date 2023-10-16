@@ -3,7 +3,7 @@ import { deleteUser, getAllUsers } from "../../api";
 import { Navbar } from "../../components/Navbar";
 import { Sidebar } from "../../components/Sidebar";
 import { TrashIcon } from "../../icons/TrashIcon";
-import {AuthMiddleware} from "../../../authmiddleware/AuthMiddleware";
+import {AuthMiddleware} from "../../authMiddleware/AuthMiddleware";
 import { Spinner } from "../../components/Spinner";
 import { User } from "@supabase/supabase-js";
 import { SessionUser } from "../../types";

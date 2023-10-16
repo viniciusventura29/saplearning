@@ -1,7 +1,7 @@
 import { ReactNode, useState } from "react";
 import { useEffect } from "react";
 import { createClient } from "@supabase/supabase-js";
-import { ProfileUser, SessionUser } from "../src/types";
+import { ProfileUser, SessionUser } from "../types";
 
 export const supabase = createClient(
   "https://sangyhnhodvxmkicjlnb.supabase.co",
