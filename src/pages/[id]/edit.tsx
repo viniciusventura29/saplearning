@@ -17,6 +17,7 @@ import { Spinner } from "../../components/Spinner";
 import { Navbar } from "../../components/Navbar";
 import AuthMiddleware from "../../../authmiddleware/authMiddleware";
 import { Footer } from "../../components/Footer";
+import { useAlert } from "../../components/Alert";
 
 export default function EditArtcilePage({
   data,
@@ -25,12 +26,9 @@ export default function EditArtcilePage({
   data: any;
   session: any;
 }) {
-  const [content, setContent] = useState(
-    data.body == "" ? "Write the article body here" : data.body
-  );
-  const [title, setTitle] = useState(
-    data.title == "" ? "Write the article title here" : data.title
-  );
+  const [content, setContent] = useState(data.body);
+  const [title, setTitle] = useState(data.title);
+  const trigger = useAlert();
 
   const editor = useEditor({
     extensions: [
@@ -74,6 +72,11 @@ export default function EditArtcilePage({
     {
       onSuccess: () => {
         queryClient.invalidateQueries(["getArticle"]);
+        trigger({
+          text: "Artigo editado com sucesso!",
+          isShowing: true,
+          duration: 4000,
+        });
       },
     }
   );

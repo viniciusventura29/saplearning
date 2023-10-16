@@ -1,9 +1,9 @@
-import { SetStateAction, useState } from "react";
+import { useState } from "react";
 import { EditIcon } from "../icons/EditIcon";
 import EditTopicModal from "./EditTopicModal";
-import { ProfileUser, SessionUser } from "../../authmiddleware/authMiddleware";
 import { TrashIcon } from "../icons/TrashIcon";
 import ConfirmDeleteTopicModal from "./ConfirmDeleteModal";
+import { ProfileUser, SessionUser } from "../types";
 
 export default function Card({
   title,

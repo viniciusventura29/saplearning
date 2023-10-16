@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useMutation, useQueryClient } from "react-query";
 import { createTopic } from "../api";
+import { useAlert } from "./Alert";
 
 export default function NewTopicModal({
   newTopicModalIsOpen,
@@ -12,6 +13,7 @@ export default function NewTopicModal({
   const [topicTitle, setTopicTitle] = useState("");
   const [topicDesc, setTopicDesc] = useState("");
   const queryClient = useQueryClient();
+  const trigger = useAlert()
 
   const topicCreate = useMutation(
     () => createTopic({ topicDesc, topicTitle }),
@@ -21,6 +23,11 @@ export default function NewTopicModal({
         setNewTopicModalIsOpen(false);
         setTopicDesc("");
         setTopicTitle("");
+        trigger({
+          text: "Tópico criado",
+          isShowing: true,
+          duration: 4000,
+        });
       },
     }
   );

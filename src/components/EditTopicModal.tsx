@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useMutation, useQueryClient } from "react-query";
 import { editTopic } from "../api";
+import { useAlert } from "./Alert";
 
 export default function NewTopicModal({
   editTopicModalIsOpen,
@@ -18,6 +19,7 @@ export default function NewTopicModal({
   const [topicTitle, setTopicTitle] = useState(topicTitleProps);
   const [topicDesc, setTopicDesc] = useState(topicDescProps);
   const queryClient = useQueryClient();
+  const trigger = useAlert();
 
   const topicEdit = useMutation(
     ({ topicId }: { topicId: string }) =>
@@ -26,6 +28,11 @@ export default function NewTopicModal({
       onSuccess: () => {
         queryClient.invalidateQueries(["getTopics"]);
         setEditTopicModalIsOpen(false);
+        trigger({
+          text: "Tópico editado",
+          isShowing: true,
+          duration: 4000,
+        });
       },
     }
   );

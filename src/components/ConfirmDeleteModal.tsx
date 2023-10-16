@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useMutation, useQueryClient } from "react-query";
 import { deleteTopic } from "../api";
+import { useAlert } from "./Alert";
 
 export default function ConfirmDeleteTopicModal({
   confirmDeleteTopicModalIsOpen,
@@ -15,12 +16,18 @@ export default function ConfirmDeleteTopicModal({
 }) {
   const [topicTitle, setTopicTitle] = useState("");
   const queryClient = useQueryClient();
+  const trigger = useAlert();
 
   const topicDelete = useMutation(() => deleteTopic({ topicTitle: title }), {
     onSuccess: () => {
       queryClient.invalidateQueries(["getTopics"]);
       setConfirmDeleteTopicModalIsOpen(false);
       setTopicTitle("");
+      trigger({
+        text: "Tópico deletado",
+        isShowing: true,
+        duration: 4000,
+      });
     },
   });
 

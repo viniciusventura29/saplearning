@@ -15,9 +15,6 @@
     "@mantine/tiptap": "^7.1.2",
     "@supabase/supabase-js": "^2.37.0",
     "@tabler/icons-react": "^2.38.0",
-    "@tiptap/extension-link": "^2.1.11",
-    "@tiptap/react": "^2.1.11",
-    "@tiptap/starter-kit": "^2.1.11",
     "@tiptap/extension-bullet-list": "2.0.0-beta.220",
     "@tiptap/extension-highlight": "2.0.0-beta.220",
     "@tiptap/extension-link": "2.0.0-beta.220",
@@ -27,12 +24,16 @@
     "@tiptap/extension-superscript": "2.0.0-beta.220",
     "@tiptap/extension-text-align": "2.0.0-beta.220",
     "@tiptap/extension-underline": "2.0.0-beta.220",
+    "@tiptap/react": "^2.1.11",
+    "@tiptap/starter-kit": "^2.1.11",
+    "clsx": "^2.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-markdown": "^9.0.0",
     "react-query": "^3.39.3",
     "react-router-dom": "^6.16.0",
-    "rehype-raw": "^7.0.0"
+    "rehype-raw": "^7.0.0",
+    "zustand": "^4.4.3"
   },
   "devDependencies": {
     "@types/react": "^18.2.15",

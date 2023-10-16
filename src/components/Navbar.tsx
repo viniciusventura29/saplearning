@@ -1,10 +1,10 @@
 import boschLogo from "../assets/Bosch_logo.svg";
 import boschSupergraphic from "../assets/Bosch-Supergraphic.svg";
-import { SessionUser } from "../../authmiddleware/authMiddleware";
 import ProfileButton from "./ProfileButton";
+import { SessionUser } from "../types";
 export const Navbar = ({ session }: { session?: SessionUser }) => {
   return (
-    <nav className="mb-8 z-50 flex w-full flex-col fixed bg-white">
+    <nav className="mb-8 z-40 flex w-full flex-col fixed bg-white">
       <div className="h-2 w-full overflow-hidden">
         <img src={boschSupergraphic} className="w-full" alt="" />
       </div>

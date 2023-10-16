@@ -1,20 +1,32 @@
 import { useState } from "react";
 import AuthMiddleware from "../../../authmiddleware/authMiddleware";
 import { Navbar } from "../../components/Navbar";
-import { Sidebar } from "../../components/sidebar";
+import { Sidebar } from "../../components/Sidebar";
 import { ArrowIcon } from "../../icons/ArrowIcon";
 import { SessionUser, UserRoles } from "../../types";
-import { useMutation } from "react-query";
+import { useMutation, useQueryClient } from "react-query";
 import { createUser } from "../../api";
+import { useAlert } from "../../components/Alert";
 
 function NewUser({ session }: { session: SessionUser }) {
   const [dropdownUser, setDropdownUser] = useState(false);
   const [role, setRole] = useState(UserRoles.USER);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const trigger = useAlert()
+  const queryClient = useQueryClient()
 
-  const createUserMutation = useMutation(() =>
-    createUser({ name, email, role })
+  const createUserMutation = useMutation(
+    () => createUser({ name, email, role }),
+    {
+      onSuccess: () => {
+        trigger({
+          text: "Usuário Criado!",
+          isShowing: true,
+          duration: 4000,
+        });
+      },
+    }
   );
 
   return (
@@ -22,7 +34,13 @@ function NewUser({ session }: { session: SessionUser }) {
       <Navbar session={session} />
       <Sidebar />
       <div className="pt-32 ml-80">
-        <form className="w-2/3" onSubmit={(e) => {createUserMutation.mutate(); e.preventDefault()}}>
+        <form
+          className="w-2/3"
+          onSubmit={(e) => {
+            createUserMutation.mutate();
+            e.preventDefault();
+          }}
+        >
           <div className="mb-6">
             <label
               htmlFor="name"
@@ -71,13 +89,19 @@ function NewUser({ session }: { session: SessionUser }) {
           >
             <ul>
               <li
-                onClick={() => {setRole(UserRoles.ADMIN); setDropdownUser(false)}}
+                onClick={() => {
+                  setRole(UserRoles.ADMIN);
+                  setDropdownUser(false);
+                }}
                 className="border w-full h-full p-2.5 hover:bg-gray-200"
               >
                 {UserRoles.ADMIN}
               </li>
               <li
-                onClick={() => {setRole(UserRoles.USER); setDropdownUser(false)}}
+                onClick={() => {
+                  setRole(UserRoles.USER);
+                  setDropdownUser(false);
+                }}
                 className="border w-full h-full p-2.5 hover:bg-gray-200"
               >
                 {UserRoles.USER}

@@ -1,12 +1,13 @@
-import { useMutation, useQuery } from "react-query";
+import { useMutation, useQuery, useQueryClient } from "react-query";
 import { deleteUser, getAllUsers } from "../../api";
 import { Navbar } from "../../components/Navbar";
-import { Sidebar } from "../../components/sidebar";
+import { Sidebar } from "../../components/Sidebar";
 import { TrashIcon } from "../../icons/TrashIcon";
 import AuthMiddleware from "../../../authmiddleware/authMiddleware";
 import { Spinner } from "../../components/Spinner";
 import { User } from "@supabase/supabase-js";
 import { SessionUser } from "../../types";
+import { useAlert } from "../../components/Alert";
 
 export function AllUsers({
   session,
@@ -27,8 +28,22 @@ export function AllUsers({
       ]
     | undefined;
 }) {
-
-    const deleteUserMutation = useMutation(['getAllUsers'], ({userId}:{userId:string})=>deleteUser({userId:userId}))
+  const trigger = useAlert()
+  const queryClient = useQueryClient()
+  const deleteUserMutation = useMutation(
+    ["getAllUsers"],
+    ({ userId }: { userId: string }) => deleteUser({ userId: userId }),
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries(["getAllUsers"]);
+        trigger({
+          text: "Usuário deletado!",
+          isShowing: true,
+          duration: 4000,
+        });
+      },
+    }
+  );
 
   return (
     <div>
@@ -68,7 +83,9 @@ export function AllUsers({
                     <td className="px-6 py-4">{us.profile.role}</td>
                     <td className="px-6 py-4">
                       <button
-                        onClick={() => deleteUserMutation.mutate({userId:us.users.id})}
+                        onClick={() =>
+                          deleteUserMutation.mutate({ userId: us.users.id })
+                        }
                         className="rounded p-2 hover:bg-red-200 group"
                       >
                         <TrashIcon className=" group-hover:stroke-red-800" />
