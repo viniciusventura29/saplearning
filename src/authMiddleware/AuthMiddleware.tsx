@@ -35,4 +35,4 @@ export const AuthMiddleware = ({
   }, []);
 
   return <div>{children(session)}</div>;
-};
+}
