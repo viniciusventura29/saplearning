@@ -1,4 +1,4 @@
-import { useLocation, useParams } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { HomeIcon } from "../icons/HomeIcon";
 import { MultUsersIcon } from "../icons/MultUsersIcon";
 import { NewUserIcon } from "../icons/NewUserIcon";

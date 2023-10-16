@@ -67,7 +67,6 @@ export default function App() {
                   key={t.title}
                   description={t.description}
                   title={t.title}
-                  id={t.id}
                 />
               ))
             )}

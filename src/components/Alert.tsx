@@ -2,7 +2,6 @@ import { create } from "zustand";
 import { CheckIcon } from "../icons/CheckIcon";
 import { ErrorIcon } from "../icons/ErrorIcon";
 import { WarningIcon } from "../icons/WarningIcon";
-import { XIcon } from "../icons/XIcon";
 
 type AlertsTypes = "success" | "error" | "warning";
 

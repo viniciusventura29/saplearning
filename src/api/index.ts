@@ -31,7 +31,7 @@ export const createTopic = async ({
   await supabase
     .from("topics")
     .insert({ title: topicTitle, description: topicDesc })
-    .then(async (e) => {
+    .then(async () => {
       await supabase
         .from("Article")
         .insert({ body: "", title: "", topic_id: topicTitle });
@@ -147,7 +147,6 @@ export const getAllUsers = async () => {
   const profile = await supabase.from("profile").select("*");
   const {
     data: { users },
-    error,
   } = await supabase.auth.admin.listUsers();
   users.map((us) =>
     profile.data?.map((prof) =>

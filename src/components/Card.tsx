@@ -8,12 +8,10 @@ import { ProfileUser, SessionUser } from "../types";
 export default function Card({
   title,
   description,
-  id,
   session,
 }: {
   title: string;
   description: string;
-  id: number;
   session: SessionUser & ProfileUser;
 }) {
   const [editTopicModalIsOpen, setEditTopicModalIsOpen] = useState(false);

@@ -62,7 +62,7 @@ function Article({ data, session }: { data: any; session: any }) {
 export default function ArticlePage() {
   const { id } = useParams();
 
-  const { data, isLoading, isError } = useQuery({
+  const { data, isLoading } = useQuery({
     queryKey: ["getArticle"],
     queryFn: () => getArticle({ topic_id: id ?? "" }),
   });
