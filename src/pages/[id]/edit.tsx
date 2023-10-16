@@ -15,7 +15,7 @@ import { useMutation, useQuery, useQueryClient } from "react-query";
 import { useParams } from "react-router-dom";
 import { Spinner } from "../../components/Spinner";
 import { Navbar } from "../../components/Navbar";
-import AuthMiddleware from "../../../authmiddleware/authMiddleware";
+import AuthMiddleware from "../../../authmiddleware/AuthMiddleware";
 import { Footer } from "../../components/Footer";
 import { useAlert } from "../../components/Alert";
 

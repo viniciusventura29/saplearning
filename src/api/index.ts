@@ -1,5 +1,4 @@
-import { User } from "@supabase/supabase-js";
-import { supabase } from "../../authmiddleware/authMiddleware";
+import { supabase } from "../../authmiddleware/AuthMiddleware";
 import { AllUsersType, UserRoles } from "../types";
 
 export const getTopics = async ({
