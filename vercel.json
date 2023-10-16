@@ -1,6 +1,7 @@
 {
     "rewrites":  [
       {"source": "/", "destination": "./src/App.tsx"},
-      {"source": "/admin", "destination": "./src/pages/admin"}
+      {"source": "/admin", "destination": "./src/pages/admin"},
+      {"source": "/:id", "destination": "./src/pages/[id]"}
     ]
   }
