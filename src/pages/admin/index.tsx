@@ -1,4 +1,4 @@
-import { AuthMiddleware } from "../../authMiddleware/AuthMiddleware";
+import { AuthMiddleware } from "../../authMiddleware/authMiddleware";
 import { Navbar } from "../../components/Navbar";
 import { Sidebar } from "../../components/Sidebar";
 import { SessionUser } from "../../types";

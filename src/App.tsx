@@ -1,4 +1,4 @@
-import { AuthMiddleware } from "./authMiddleware/AuthMiddleware";
+import { AuthMiddleware } from "./authMiddleware/authMiddleware";
 import { Navbar } from "./components/Navbar";
 import Hero from "./components/Hero";
 import { useState } from "react";
