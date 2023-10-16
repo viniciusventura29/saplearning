@@ -1,0 +1,6 @@
+{
+    "rewrites":  [
+      {"source": "/", "destination": "./src/App.tsx"},
+      {"source": "/admin", "destination": "./src/pages/admin"}
+    ]
+  }
