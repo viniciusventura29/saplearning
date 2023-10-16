@@ -1,4 +1,4 @@
-import { supabase } from "../authMiddleware/authMiddleware";
+import { supabase } from "../authMiddleware/AuthMiddleware";
 import { AllUsersType, UserRoles } from "../types";
 
 export const getTopics = async ({

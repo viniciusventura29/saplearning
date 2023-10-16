@@ -1,6 +1,6 @@
 import { useState } from "react";
 import {  supabase,
-} from "../authMiddleware/authMiddleware";
+} from "../authMiddleware/AuthMiddleware";
 import { UserIcon } from "../icons/UserIcon";
 import { ProfileUser, SessionUser } from "../types";
 

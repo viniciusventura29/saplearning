@@ -1,5 +1,5 @@
 import { useState } from "react";
-import {AuthMiddleware} from "../../authMiddleware/authMiddleware";
+import {AuthMiddleware} from "../../authMiddleware/AuthMiddleware";
 import { Navbar } from "../../components/Navbar";
 import { Sidebar } from "../../components/Sidebar";
 import { ArrowIcon } from "../../icons/ArrowIcon";

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import boschLogo from "../assets/Bosch_logo.svg";
 import { useNavigate } from "react-router-dom";
-import { supabase } from "../authMiddleware/authMiddleware";
+import { supabase } from "../authMiddleware/AuthMiddleware";
 
 export default function App() {
   const navigate = useNavigate();
