@@ -2,18 +2,34 @@ import { useState } from "react";
 import boschLogo from "../assets/Bosch_logo.svg";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "../authMiddleware/AuthMiddleware";
+import { useAlert } from "../components/Alert";
 
 export default function App() {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const trigger = useAlert()
 
   const login = () => {
     supabase.auth
       .signInWithPassword({ email: email, password: password })
       .then((e) => {
-        console.log(e.data.user);
-        navigate("/");
+        if(e.data.user){
+          navigate("/");
+          trigger({
+            text: "Login bem sucedido",
+            isShowing: true,
+            duration: 4000,
+          });
+        }else{
+          trigger({
+            text: "Email ou senha errada!",
+            isShowing: true,
+            duration: 4000,
+            type: "error"
+          });
+        }
+        
       });
   };
 
