@@ -177,3 +177,9 @@ export const createUser = async ({
 
     return console.log("User created")
 };
+
+export const changePassword = async({newPassword}:{newPassword:string}) =>{
+  await supabase.auth.updateUser({password:newPassword})
+
+  return "User password changed!"
+}

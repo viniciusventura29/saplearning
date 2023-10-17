@@ -11,6 +11,7 @@ import { AdminPage } from "./pages/admin/index.tsx";
 import { AllUsersPage } from "./pages/admin/AllUsers.tsx";
 import { NewUserPage } from "./pages/admin/NewUser.tsx";
 import { Alert } from "./components/Alert.tsx";
+import { UserPage } from "./pages/UserPage.tsx";
 
 const queryClient = new QueryClient();
 
@@ -43,6 +44,9 @@ const router = createBrowserRouter([
     path: "/admin/allUsers",
     element: <AllUsersPage />,
   },
+  {path: "/me",
+  element: <UserPage />,
+  }
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
