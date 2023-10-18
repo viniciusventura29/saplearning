@@ -3,7 +3,7 @@ import { deleteUser, getAllUsers } from "../../api";
 import { Navbar } from "../../components/Navbar";
 import { Sidebar } from "../../components/Sidebar";
 import { TrashIcon } from "../../icons/TrashIcon";
-import {AuthMiddleware} from "../../authMiddleware/AuthMiddleware";
+import { AuthMiddleware } from "../../authMiddleware/AuthMiddleware";
 import { Spinner } from "../../components/Spinner";
 import { User } from "@supabase/supabase-js";
 import { SessionUser } from "../../types";
@@ -28,8 +28,8 @@ export function AllUsers({
       ]
     | undefined;
 }) {
-  const trigger = useAlert()
-  const queryClient = useQueryClient()
+  const trigger = useAlert();
+  const queryClient = useQueryClient();
   const deleteUserMutation = useMutation(
     ["getAllUsers"],
     ({ userId }: { userId: string }) => deleteUser({ userId: userId }),
@@ -65,6 +65,9 @@ export function AllUsers({
                   Role
                 </th>
                 <th scope="col" className="px-6 py-3">
+                  Authentication
+                </th>
+                <th scope="col" className="px-6 py-3">
                   Action
                 </th>
               </tr>
@@ -81,6 +84,17 @@ export function AllUsers({
                     </th>
                     <td className="px-6 py-4">{us.users.email}</td>
                     <td className="px-6 py-4">{us.profile.role}</td>
+                    <td className="px-6 py-4">
+                      {us.users.confirmed_at ? (
+                        <span className="p-2 text-xs text-black bg-green-300 rounded">
+                          OK
+                        </span>
+                      ) : (
+                        <span className="p-2 text-xs text-black bg-yellow-200 rounded">
+                          Pending
+                        </span>
+                      )}
+                    </td>
                     <td className="px-6 py-4">
                       <button
                         onClick={() =>
