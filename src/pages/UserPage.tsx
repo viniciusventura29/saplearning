@@ -35,6 +35,7 @@ function User({ session }: { session: SessionUser }) {
           }}
         >
           <div className="mb-6">
+            <h1 className="text-2xl mb-6 font-bold">Change Password</h1>
             <label
               htmlFor="newPassword"
               className="block mb-2 text-sm font-medium text-gray-900"
