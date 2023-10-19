@@ -20,9 +20,9 @@ function NewUser({ session }: { session: SessionUser }) {
     {
       onSuccess: () => {
         trigger({
-          text: "Usuário Criado!",
+          text: "Sucesso! O usuário receberá um email para a verificação da sua conta",
           isShowing: true,
-          duration: 4000,
+          duration: 7000,
         });
       },
     }
