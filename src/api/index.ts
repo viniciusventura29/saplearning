@@ -171,15 +171,30 @@ export const createUser = async ({
   email: string;
   role: UserRoles;
 }) => {
-    await supabase.auth.admin.createUser({email,password:name+"GSTET3"}).then(async(e)=>{
-      await supabase.from('profile').insert({name:name, role:role, user_id:e.data.user?.id})
-    })
+  await supabase.auth.admin
+    .createUser({ email, password: name + "GSTET3" })
+    .then(async (e) => {
+      await supabase
+        .from("profile")
+        .insert({ name: name, role: role, user_id: e.data.user?.id })
+        .then(
+          async () =>
+            await supabase.auth.signInWithOtp({
+              email: email,
+              options: { emailRedirectTo: "https://saplearning.vercel.app/" },
+            })
+        );
+    });
 
-    return console.log("User created")
+  return console.log("User created");
 };
 
-export const changePassword = async({newPassword}:{newPassword:string}) =>{
-  await supabase.auth.updateUser({password:newPassword})
+export const changePassword = async ({
+  newPassword,
+}: {
+  newPassword: string;
+}) => {
+  await supabase.auth.updateUser({ password: newPassword });
 
-  return "User password changed!"
-}
+  return "User password changed!";
+};
