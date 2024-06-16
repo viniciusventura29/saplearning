@@ -1,5 +1,5 @@
 import { useState } from "react";
-import boschLogo from "../assets/Bosch_logo.svg";
+import logo from "../assets/logo.png";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "../authMiddleware/AuthMiddleware";
 import { useAlert } from "../components/Alert";
@@ -45,11 +45,11 @@ export default function App() {
                     <div className="text-center">
                       <img
                         className="mx-auto w-48"
-                        src={boschLogo}
+                        src={logo}
                         alt="logo"
                       />
                       <h4 className="mb-12 mt-1 pb-1 text-xl font-semibold">
-                        We are Bosch
+                        We are MonkeyDevs
                       </h4>
                     </div>
 
@@ -61,7 +61,7 @@ export default function App() {
                           type="email"
                           className="peer block min-h-[auto] w-full  p-4 rounded border bg-gray-50 leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:placeholder:text-neutral-200 [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"
                           id="exampleFormControlInput1"
-                          placeholder="JohnDoe@br.bosch.com"
+                          placeholder="JohnDoe@gmail.com"
                           onChange={(e) => setEmail(e.target.value)}
                           value={email}
                         />

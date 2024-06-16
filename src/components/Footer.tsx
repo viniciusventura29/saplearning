@@ -1,4 +1,4 @@
-import BoschLogo from "../assets/Bosch_logo.svg";
+import logo from "../assets/logo.png";
 
 export const Footer = () => {
   return (
@@ -7,16 +7,16 @@ export const Footer = () => {
         <div className="sm:flex sm:items-center sm:justify-between">
           <a
             target="_blank"
-            href="https://www.bosch.com/"
+            href=""
             className="flex items-center mb-4 sm:mb-0"
           >
-            <img src={BoschLogo} className="h-16 mr-3" alt="Flowbite Logo" />
+            <img src={logo} className="h-16 mr-3" alt="Flowbite Logo" />
           </a>
           <ul className="flex flex-wrap items-center mb-6 text-sm font-medium text-gray-500 sm:mb-0">
             <li>
               <a
                 target="_blank"
-                href="https://www.bosch.com/company/"
+                href=""
                 className="mr-4 hover:underline md:mr-6 "
               >
                 About
@@ -25,7 +25,7 @@ export const Footer = () => {
             <li>
               <a
                 target="_blank"
-                href="https://www.bosch.com/"
+                href=""
                 className="mr-4 hover:underline md:mr-6"
               >
                 Privacy Policy
@@ -34,7 +34,7 @@ export const Footer = () => {
             <li>
               <a
                 target="_blank"
-                href="https://www.bosch.com/contact/"
+                href=""
                 className="hover:underline"
               >
                 Contact
@@ -46,7 +46,7 @@ export const Footer = () => {
         <span className="block text-sm text-gray-500 sm:text-center">
           © 2023{" "}
           <a href="https://flowbite.com/" className="hover:underline">
-            Bosch
+            Monkeydevs
           </a>
           . All Rights Reserved.
         </span>
